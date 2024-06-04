@@ -5,12 +5,21 @@ using UnityEngine;
 public class Driver : MonoBehaviour
 {
     [SerializeField] float steerSpeed = 0.1f;
-    [SerializeField] float moveSpeed = 0.01f;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
+    [SerializeField] float moveSpeed = 20f;
+    [SerializeField] float slowSpeed = 15f;
+    [SerializeField] float boostSpeed = 30f;
 
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        moveSpeed = slowSpeed;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "SpeedUp")
+        {
+            moveSpeed = boostSpeed;
+        }
     }
 
     // Update is called once per frame
